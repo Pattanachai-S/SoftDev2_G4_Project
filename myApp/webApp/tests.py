@@ -1,18 +1,9 @@
-from django.test import Client, TestCase
+from django.urls import resolve
+from django.test import TestCase
+from webApp.views import home_page  
 
-class Register(TestCase):
-    
-    def test_contact_form_submission(self):
-        # Create a test client
-        client = Client()
+class HomePageTest(TestCase):
 
-        # Make a POST
-        response = client.post('/submit/', {'name': 'groot', 'surname': 'groot@avengers.com', 'username': 'im_groot' , 'password': 'IamGroot'})
-        
-        #successful form submission
-        self.assertEqual(response.status_code, 302)
-
-        # Follow redirect
-        response = client.get(response.url)
-
-        # Check result of register...
+    def test_root_url_resolves_to_home_page_view(self):
+        found = resolve('/')  
+        self.assertEqual(found.func, home_page)  
