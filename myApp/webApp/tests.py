@@ -7,7 +7,7 @@ class Register(TestCase):
         client = Client()
 
         # Make a POST
-        response = client.post('/submit/', {'name': 'groot', 'surname': 'groot@avengers.com', 'username': 'im_groot!' , 'password': 'grootgroot'})
+        response = client.post('/submit/', {'name': 'groot', 'surname': 'groot@avengers.com', 'username': 'im_groot' , 'password': 'IamGroot'})
         
         #successful form submission
         self.assertEqual(response.status_code, 302)
