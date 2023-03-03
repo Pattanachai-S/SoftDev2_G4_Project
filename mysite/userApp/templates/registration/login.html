@@ -1,0 +1,18 @@
+{% extends 'generalApp/components/base.html' %}
+
+{% block title %}เข้าสู่ระบบ | {% endblock %}
+
+{% block content %}
+
+<div>
+    <h2>เข้าสู่ระบบ</h2>
+    <form action="{% url 'login' %}" method='post'>
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <p>
+            <button type="submit" >Log in</button>
+        </p>
+    </form>
+</div>
+
+{% endblock %}

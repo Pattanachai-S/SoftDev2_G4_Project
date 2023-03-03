@@ -1,0 +1,14 @@
+<header style="background-color: cadetblue;">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'study' %}">Study Timetable</a>
+    <a href="{% url 'exam' %}">Exam Timetable</a>
+    <a href="{% url 'check' %}">Check Subject</a>
+    <a href="{% url 'aboutus' %}">About Us</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'login' %}">{{ user.username }}</a>
+        <a href="{% url 'logout' %}">Log Out</a>    
+    {% else %}
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
+</header>
