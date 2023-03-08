@@ -7,6 +7,8 @@ class RegisterTest(TestCase):
 
     register_url = '/users/register'
 
+    #
+
     def test_uses_register_template(self):
         response = self.client.get(self.register_url)
         self.assertTemplateUsed(response, 'userApp/register.html')
@@ -26,4 +28,5 @@ class RegisterTest(TestCase):
         queried_user = User.objects.get(username='user123456')
         self.assertEqual(User.username, queried_user.username)
         self.assertEqual(User.password, queried_user.password)
+        queried_user.delete()
 
