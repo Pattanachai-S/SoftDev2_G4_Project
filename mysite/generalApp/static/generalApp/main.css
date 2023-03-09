@@ -1,0 +1,144 @@
+/* mitr-300 - latin_thai */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Mitr';
+    font-style: normal;
+    font-weight: 300;
+    src:url('fonts/mitr-v11-latin_thai-300.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+        url('fonts/mitr-v11-latin_thai-300.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mitr-regular - latin_thai */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Mitr';
+    font-style: normal;
+    font-weight: 400;
+    src:url('fonts/mitr-v11-latin_thai-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
+        url('fonts/mitr-v11-latin_thai-regular.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/*Global */
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html {
+    color: #333333;
+    font-family: 'Mitr', 'sans-serif';
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #111111;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
+้h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
+a {
+    color: rgb(199, 215, 245);
+}
+
+.button {
+    color: white;
+    background-color: cadetblue;
+    border: none;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-block;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.content-section {
+    padding: 64px 16px;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*site header*/
+.site-header {
+    background-color: cadetblue;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    height: 50px;
+}
+
+.site-header-item {
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    transition: background-color 300ms;
+}
+
+.site-header-item:hover {
+    background-color: whitesmoke;
+}
+
+.site-header-right {
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    padding: 0px 10px;
+    transition: background-color 300ms;
+
+}
+
+.site-header-right:hover {
+    background-color: whitesmoke;
+}
+
+/*home intro section*/
+.home-intro-section {
+    text-align: center;
+    padding: 50px 16px;
+}
+
