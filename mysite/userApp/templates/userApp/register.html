@@ -3,16 +3,35 @@
 {% block title %}สมัครสมาชิก | {% endblock %}
 
 {% block content %}
-
-<div>
-    <h2>สมัครสมาชิก</h2>
-    <form action="{% url 'register' %}" method='post'>
-        {% csrf_token %} 
-        {{ form.as_p }}
+<section class="content-section">
+    <div class="content-container">
+      <h3 class="content-title">สมัครสมาชิก</h3>
+      <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-field">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+        <div class="form-field">
+          {{ form.password1.label_tag }}
+          {{ form.password1 }}
+          {{ form.password1.errors }}
+        </div>
+        <div class="form-field">
+          {{ form.password2.label_tag }}
+          {{ form.password2 }}
+          {{ form.password2.errors }}
+        </div>
+        <div class="form-field">
+          <button class="button button-primary" type="submit">สมัครสมาชิก</button>
+        </div>
         <p>
-            <button type="submit" >สมัครสมาชิก</button>
+          <a href="{% url 'login' %}">เข้าสู่ระบบ</a>
         </p>
-    </form>
-</div>
+      </form>
+    </div>
+  </section>
 
 {% endblock %}
