@@ -1,0 +1,34 @@
+{% extends 'generalApp/components/base.html' %}
+
+{% block title %}ตั้งค่าตารางเรียน | {% endblock %}
+
+{% block content %}
+
+<div class="header-section">
+    <h1>Edit Study Timetable</h1>
+</div>
+
+<div class="content-section">
+    <div class="content-container">
+        <form method="get">
+        <input type="search" name='q' placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+    
+        <br>
+
+        {% for subject in subject %}
+        <div class="cardd">
+            <div class="container-about">
+                <br>
+                <a class="button-link" href="#">{{ subject.subject_ID}} {{ subject.name }}</a>
+                <br>
+                <br>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

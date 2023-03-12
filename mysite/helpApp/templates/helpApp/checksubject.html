@@ -4,8 +4,31 @@
 
 {% block content %}
 
-<div>
-    <h2>เช็ควิชาที่ลงได้</h2>
+<div class="header-section">
+    <h1>เช็ควิชาที่ลงได้</h1>
+</div>
+
+<div class="content-section">
+    <div class="content-container">
+        <form method="get">
+        <input type="search" name='q' placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+    
+        <br>
+
+        {% for subject in subject %}
+        <div class="cardd">
+            <div class="container-about">
+                <br>
+                <a class="button-link" href="#">{{ subject.subject_ID}} {{ subject.name }}</a>
+                <br>
+                <br>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

@@ -102,6 +102,20 @@ a {
     margin-bottom: 24px;
 }
 
+.button-link {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.cardd {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.cardd:hover {
+    background-color: cadetblue;
+}
+
 /*site header*/
 .site-header {
     background-color: cadetblue;
@@ -189,9 +203,9 @@ a {
     text-align: center;
 }
 
-.column-4 {
+.column-2 {
     float: left;
-    width: 25%;
+    width: 50%;
     margin-bottom: 16px;
     padding: 0 8px;
 }
@@ -257,5 +271,28 @@ textarea {
   
 textarea {
     height: auto;
+}
+
+.header-section {
+    padding: 50px;
+    text-align: center;
+}
+
+/*study timetable*/
+table, th, td {
+    border: 3px solid black;
+    border-collapse: collapse;
+    border-color: rgb(7, 101, 104);
+}
+
+td {
+    text-align: center;
+    height: 50px;
+    width: 100px;
+}
+
+.text-table {
+    background-color: cadetblue;
+    color: white;
 }
 
