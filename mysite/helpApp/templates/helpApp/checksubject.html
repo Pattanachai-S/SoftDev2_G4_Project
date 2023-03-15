@@ -11,7 +11,7 @@
 <div class="content-section">
     <div class="content-container">
         <form method="get">
-        <input type="search" name='q' placeholder="Search">
+        <input type="search" name='search-subject' placeholder="Search">
         <button type="submit">Search</button>
         </form>
     
@@ -21,7 +21,7 @@
         <div class="cardd">
             <div class="container-about">
                 <br>
-                <a class="button-link" href="#">{{ subject.subject_ID}} {{ subject.name }}</a>
+                <a class="button-link" href="{% url 'verify' subject.subject_ID %}">{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
             </div>
