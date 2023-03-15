@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.urls import reverse
 from django.contrib.auth.models import User
 import time
 
@@ -37,14 +38,20 @@ class LoginTest(TestCase):
 
     def test_uses_login_template(self):
         response = self.client.get(self.login_url)
-        self.assertTemplateUsed(response, 'userApp/login.html')
+        self.assertTemplateUsed(response, 'registration/login.html')
 
-    def test_can_login(self):
-        response = self.client.post(self.login_url, data={
-            'username': 'testuser123456',
-            'password': 'password-123456'
-            })
-        self.assertTrue(response.wsgi_request.user.is_authenticated)
-        self.assertRedirects(response, '/')  # redirects to home
+
+    def setUp(self):
+        self.username = 'testuser'
+        self.password = 'testpass'
+        self.user = User.objects.create_user(
+            username=self.username,
+            password=self.password
+        )
     
-
+    def test_login(self):
+        url = reverse('login')
+        data = {'username': self.username, 'password': self.password}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
