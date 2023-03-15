@@ -2,13 +2,13 @@ from bs4 import BeautifulSoup
 from django.db import models
 import os 
 from datetime import datetime
-from helpApp.models import Subject
+import sqlite3
 
 class Scraping():
     
     def __init__(self):
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        os.chdir(dir_path)
+        self.dir_path = os.path.dirname(os.path.realpath(__file__))
+        os.chdir(self.dir_path)
         file = "dataQuerySelector.html"
 
 
@@ -39,6 +39,7 @@ class Scraping():
                 print(cell)
 
     def save_to_database(self):
+        self.subject_list = self.subject_list.pop()
         for subject in self.subject_list:
             
             subject_id = subject[0][0:9]
@@ -46,23 +47,29 @@ class Scraping():
             mid_term = self.convert_to_date_format(subject[1])
             final = self.convert_to_date_format(subject[2])
 
-            s = Subject(subject_ID=subject_id,
-                    name=subject_name,
-                    mid_term=mid_term,
-                    final=final)
-            s.save()
+        os.chdir("\..")
+        conn = sqlite3.connect('db.sqlite3')
+        # Create a cursor object to interact with the database
+        c = conn.cursor()
+        # Insert data into the table
+        c.execute("INSERT INTO helpApp_subject (subject_ID, name, mid_term, final) VALUES (?, ?, ?, ?)", (subject_id,subject_name,mid_term,final))
 
     def convert_to_date_format(self, date):
-        date = date.split(" ")
-        date_str = date[1] + " " + date[2]
-        date_format = "%d/%m/%Y %H:%M-%H:%M"
-        date_time = datetime.strptime(date_str, date_format)
-        return date_time
+        print(date)
+        if date != "":
+            date = date.split(" ")
+            date_str = date[1] + " " + date[2]
+            date_format = "%d/%m/%Y %H:%M-%H:%M"
+            date_time = datetime.strptime(date_str, date_format)
+            return date_time
+        else:
+            return ""
     
 
     
 if __name__ == "__main__":
     scraping = Scraping()
-    scraping.save_to_database()
+    # scraping.save_to_database()
+    scraping.show_data()
 
 
