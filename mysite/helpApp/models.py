@@ -4,8 +4,8 @@ from django.db import models
 class Subject(models.Model):
     subject_ID = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    mid_term = models.DateTimeField('mid term', null=True,blank=True)
-    final = models.DateTimeField('final', null=True,blank=True)
+    mid_term = models.CharField(max_length=200, null=True,blank=True)
+    final = models.CharField(max_length=200, null=True,blank=True)
     
     def __str__(self):
         return self.name

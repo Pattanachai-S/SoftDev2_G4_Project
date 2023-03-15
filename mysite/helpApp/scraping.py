@@ -11,7 +11,6 @@ class Scraping():
         os.chdir(self.dir_path)
         file = "dataQuerySelector.html"
 
-
         # Open the HTML file
         with open(file, 'r', encoding="cp874") as file:
             html_content = file.read()
@@ -29,7 +28,7 @@ class Scraping():
             for cell in row.find_all('td'):
                 # Print the contents of each td element
                 text = cell.get_text()
-                subject.append(text.replace('\n\t\t', ''))
+                subject.append(text.replace('\n\t\t', '').replace('  ', ' '))
             self.subject_list.append(subject)
 
     def show_data(self):
@@ -39,37 +38,42 @@ class Scraping():
                 print(cell)
 
     def save_to_database(self):
-        self.subject_list = self.subject_list.pop()
-        for subject in self.subject_list:
-            
-            subject_id = subject[0][0:9]
-            subject_name = subject[0][10:]
-            mid_term = self.convert_to_date_format(subject[1])
-            final = self.convert_to_date_format(subject[2])
-
-        os.chdir("\..")
+        os.chdir(self.dir_path)
+        os.chdir("../")
+        print(os.getcwd())
         conn = sqlite3.connect('db.sqlite3')
         # Create a cursor object to interact with the database
         c = conn.cursor()
         # Insert data into the table
-        c.execute("INSERT INTO helpApp_subject (subject_ID, name, mid_term, final) VALUES (?, ?, ?, ?)", (subject_id,subject_name,mid_term,final))
-
+        for subject in self.subject_list:
+            print(subject)
+            if subject != ['วิชาที่เปิดใน 2/2565', 'กลางภาค', 'ปลายภาค']:
+                subject_id = subject[0][0:9]
+                subject_name = subject[0][10:]
+                mid_term = subject[1]
+                final = subject[2]
+                c.execute("INSERT INTO helpApp_subject (subject_ID, name, mid_term, final) VALUES (?, ?, ?, ?)", (subject_id,subject_name,mid_term,final))
+        conn.commit()  # Save changes to the database
+        conn.close()  # Close the connection
+        
     def convert_to_date_format(self, date):
         print(date)
-        if date != "":
+        if date != " ":
             date = date.split(" ")
+            print(date)
             date_str = date[1] + " " + date[2]
             date_format = "%d/%m/%Y %H:%M-%H:%M"
             date_time = datetime.strptime(date_str, date_format)
             return date_time
         else:
-            return ""
+            return " "
     
 
     
 if __name__ == "__main__":
     scraping = Scraping()
-    # scraping.save_to_database()
     scraping.show_data()
+    scraping.save_to_database()
+    
 
 

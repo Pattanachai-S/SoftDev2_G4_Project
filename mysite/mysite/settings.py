@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'generalApp.apps.GeneralappConfig',
     'helpApp.apps.HelpappConfig',
     'userApp.apps.UserappConfig',
-    'helpApp.scraping.Scraping',
-
 ]
 
 MIDDLEWARE = [
