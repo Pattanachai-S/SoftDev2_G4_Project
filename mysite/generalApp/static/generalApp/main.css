@@ -114,7 +114,7 @@ a {
 }
 
 .cardd:hover {
-    border-color: cadetblue;
+    box-shadow: 0 4px 8px 0 cadetblue;
 }
 
 
