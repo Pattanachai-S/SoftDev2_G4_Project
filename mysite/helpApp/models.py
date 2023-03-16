@@ -12,7 +12,7 @@ class Subject(models.Model):
 
 class Section(models.Model):
     subject_ID = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    sec_num = models.IntegerField()
+    sec_num = models.CharField(max_length=200)
     day = models.CharField(max_length=200)
     time = models.CharField(max_length=200)
     teacher = models.CharField(max_length=200)
