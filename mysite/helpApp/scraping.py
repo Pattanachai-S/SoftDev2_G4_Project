@@ -32,6 +32,7 @@ class Scraping():
                 text = cell.get_text()
                 subject.append(text.replace('\n\t\t', '').replace('  ', ' '))
             self.subject_list.append(subject)
+        self.subject_list.pop(0)
 
 
     def show_data(self):
@@ -216,8 +217,8 @@ class Scraping():
 if __name__ == "__main__":
     scraping = Scraping()
     # scraping.clear_table()
-    # scraping.scrap_subject()
-    # scraping.show_data()
+    scraping.scrap_subject()
+    scraping.show_data()
     # scraping.save_to_database()
     # scraping.scrap_section()
     # scraping.show_data_sec() 
