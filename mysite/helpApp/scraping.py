@@ -30,7 +30,9 @@ class Scraping():
             for cell in row.find_all('td'):
                 # Print the contents of each td element
                 text = cell.get_text()
-                subject.append(text.replace('\n\t\t', '').replace('  ', ' '))
+                text = text.replace('\n\t\t', '')  # Remove void line 
+                text = text.replace('  ', ' ')  #  change double space to one space 
+                subject.append(text)
             self.subject_list.append(subject)
         self.subject_list.pop(0)
 
@@ -56,12 +58,11 @@ class Scraping():
         # Insert data into the table
         for subject in self.subject_list:
             print(subject)
-            if subject != ['วิชาที่เปิดใน 2/2565', 'กลางภาค', 'ปลายภาค']:
-                subject_id = subject[0][0:9]
-                subject_name = subject[0][10:]
-                mid_term = subject[1]
-                final = subject[2]
-                c.execute("INSERT INTO helpApp_subject (subject_ID, name, mid_term, final) VALUES (?, ?, ?, ?)", (subject_id,subject_name,mid_term,final))
+            subject_id = subject[0][0:9]
+            subject_name = subject[0][10:]
+            mid_term = subject[1]
+            final = subject[2]
+            c.execute("INSERT INTO helpApp_subject (subject_ID, name, mid_term, final) VALUES (?, ?, ?, ?)", (subject_id,subject_name,mid_term,final))
         conn.commit()  # Save changes to the database
         conn.close()  # Close the connection
         
