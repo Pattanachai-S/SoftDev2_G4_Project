@@ -86,7 +86,9 @@ class Scraping():
         conn = sqlite3.connect('db.sqlite3')      
         c = conn.cursor()  # Create a cursor object to interact with the database
         
-        c.execute("DELETE FROM helpApp_subject") # Execute a DELETE statement to clear all data from the table
+        # Execute a DELETE statement to clear all data from the table
+        c.execute("DELETE FROM helpApp_subject")
+        c.execute("DELETE FROM helpApp_section")
 
         conn.commit() # Save changes to the database     
         conn.close() # Close the connection
@@ -195,11 +197,12 @@ class Scraping():
             sec_day = sns[1][1]
             sec_time = sns[1][2]
             sec_teacher = sns[1][3]
-            cur.execute("INSERT INTO helpApp_section (subject_ID, sec_num, day, time, teacher) VALUES (?, ?, ?, ?, ?)", (subject_id,sec_number,sec_day,sec_time,sec_teacher))
+            # Get the user ID
+            subject_id = conn.execute("SELECT id FROM helpApp_subject WHERE subject_ID=?", (subject_id,)).fetchone()[0]
+            cur.execute("INSERT INTO helpApp_section (subject_ID_id, sec_num, day, time, teacher) VALUES (?, ?, ?, ?, ?)", (subject_id,sec_number,sec_day,sec_time,sec_teacher))
 
-        # close the cursor and connection
-        cur.close()
-        conn.close()
+        conn.commit()  # Save changes to the database
+        conn.close()  # Close the connection
 
 
 
@@ -212,12 +215,13 @@ class Scraping():
     
 if __name__ == "__main__":
     scraping = Scraping()
+    # scraping.clear_table()
     # scraping.scrap_subject()
     # scraping.show_data()
     # scraping.save_to_database()
-    scraping.scrap_section()
+    # scraping.scrap_section()
     # scraping.show_data_sec() 
-    scraping.save_sec_to_database()
+    # scraping.save_sec_to_database()
     
 
 
