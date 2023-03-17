@@ -208,14 +208,7 @@ class Scraping():
 
 
 
-
-
-
-
-        
-
-    
-if __name__ == "__main__":
+def scraping():
     scraping = Scraping()
 
     """for clear old data"""
@@ -225,6 +218,8 @@ if __name__ == "__main__":
     # scraping.scrap_subject()
     # scraping.show_data()
     # # scraping.save_to_database() 
+    # sub = subject()
+    # sub.update()
 
     """for scrarp section"""
     # scraping.scrap_section()
@@ -232,6 +227,9 @@ if __name__ == "__main__":
     # scraping.save_sec_to_database()
     # sec = update_section()
     # sec.update()
+   
+if __name__ == "__main__":
+    scraping()
     
 
 
