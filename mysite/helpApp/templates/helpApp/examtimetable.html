@@ -8,4 +8,32 @@
     <h1>Exam Timetable</h1>
 </div>
 
+<section class="content-section">
+    <div class="content-container">
+        <h2 class="content-title text-center">Mid-term</h2>
+        {% for course in course %}
+        <div class="card-about">
+            <div class="container-about">
+                <h4>{{ course.section.subject_ID.name }}</h4>
+                <p>{{ course.section.subject_ID.mid_term }}</p>
+            </div>
+        </div>     
+        {% endfor%}
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="content-container">
+        <h2 class="content-title text-center">Final</h2>
+        {% for course in course %}
+        <div class="card-about">
+            <div class="container-about">
+                <h4>{{ course.section.subject_ID.name }}</h4>
+                <p>{{ course.section.subject_ID.final }}</p>
+            </div>
+        </div>     
+        {% endfor%}      
+    </div>
+</section>
+
 {% endblock %}

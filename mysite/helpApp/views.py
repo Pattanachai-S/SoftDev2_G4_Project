@@ -9,7 +9,8 @@ def studyTimetable(request):
     return render(request, 'helpApp/studytimetable.html', {'course':course})
 
 def examTimetable(request):
-    return render(request, 'helpApp/examtimetable.html')
+    course = User_subject.objects.all()
+    return render(request, 'helpApp/examtimetable.html', {'course':course})
 
 def checkSubject(request):
     if 'search-subject' in request.GET:
