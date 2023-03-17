@@ -30,6 +30,6 @@ def settingtable(request):
         subject = Subject.objects.all()
     return render(request, 'helpApp/settingtable.html', {'subject':subject})
 
-def checking(request, subject_ID):
-    subject = Subject.objects.all()
+def verify(request, subject_ID):
+    subject = Subject.objects.get(id=subject_ID)
     return render(request, 'helpApp/checking.html',{'subject':subject})

@@ -32,12 +32,25 @@
                 </select>
                 <br>
                 <br>
-                <button type="submit" class="button">Add</button>
+                <button type="submit" class="button" onclick="changeButton(this)">Add</button>
             </div>
         </div>
         <br>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    function changeButton(button) {
+        if (button.innerHTML === 'Add') {
+            button.innerHTML = 'Delete';
+            button.classList.toggle('button-delete');
+        } else {
+            button.innerHTML = 'Add';
+            button.classList.toggle('button-delete');
+        }
+        button.classList.toggle('button');
+    }
+</script>
 
 {% endblock %}

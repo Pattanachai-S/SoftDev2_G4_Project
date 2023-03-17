@@ -6,5 +6,5 @@ urlpatterns = [
     path('examtimetable', views.examTimetable, name='exam'),
     path('checksubject', views.checkSubject, name='check'),
     path('settingtimetable', views.settingtable, name='table'),
-    path('check/<int:subject_ID>', views.checking, name='verify'),
+    path('verify/<int:subject_ID>', views.verify, name='verify'),
 ]
