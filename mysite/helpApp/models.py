@@ -16,6 +16,8 @@ class Section(models.Model):
     day = models.CharField(max_length=200)
     time = models.CharField(max_length=200)
     teacher = models.CharField(max_length=200)
+    start_time = models.CharField(max_length=200, null=True,blank=True)
+    end_time = models.CharField(max_length=200, null=True,blank=True)
 
     def __str__(self):
         return f"{self.subject_ID.name} - Section {self.sec_num}"
