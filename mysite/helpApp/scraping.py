@@ -3,7 +3,7 @@ from django.db import models
 import os 
 from datetime import datetime
 import sqlite3
-
+from update_time_db import section as update_section
 class Scraping():
     
     def __init__(self) -> None:
@@ -217,13 +217,21 @@ class Scraping():
     
 if __name__ == "__main__":
     scraping = Scraping()
+
+    """for clear old data"""
     # scraping.clear_table()
-    scraping.scrap_subject()
-    scraping.show_data()
-    # scraping.save_to_database()
+    
+    """for scrap subject"""
+    # scraping.scrap_subject()
+    # scraping.show_data()
+    # # scraping.save_to_database() 
+
+    """for scrarp section"""
     # scraping.scrap_section()
     # scraping.show_data_sec() 
     # scraping.save_sec_to_database()
+    # sec = update_section()
+    # sec.update()
     
 
 
