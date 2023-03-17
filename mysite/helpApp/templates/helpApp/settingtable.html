@@ -27,7 +27,7 @@
                 <br>
                 <select name="section">
                     {% for section in subject.section_set.all %}
-                    <option value="{{ section.sec_num }}">{{ section.day }} {{ section.time }}</option>
+                    <option value="{{ section.sec_num }}">{{ section.sec_num }} {{ section.day }} {{ section.time }}</option>
                     {% endfor %}
                 </select>
                 <br>
