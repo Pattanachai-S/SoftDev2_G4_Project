@@ -1,10 +1,12 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Section, Subject
+from userApp.models import User_subject
 from django.db.models import Q
 
 def studyTimetable(request):
-    return render(request, 'helpApp/studytimetable.html')
+    course = User_subject.objects.all()
+    return render(request, 'helpApp/studytimetable.html', {'course':course})
 
 def examTimetable(request):
     return render(request, 'helpApp/examtimetable.html')

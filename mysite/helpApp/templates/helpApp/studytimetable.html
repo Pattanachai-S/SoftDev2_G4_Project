@@ -31,22 +31,57 @@
 
             <tr>
                 <td class="text-table">Monday</td>
+                {% for course in course %}
+                {% if course.section.day == 'M' %}
+                <td>{{ course.section.subject_ID.name }}<br>
+                    {{ course.section.teacher }}<br>
+                </td>
+                {% endif %}
+                {% endfor %}
             </tr>
 
             <tr>
                 <td class="text-table">Tuesday</td>
+                {% for course in course %}
+                {% if course.section.day == 'T' %}
+                <td>{{ course.section.subject_ID.name }}<br>
+                    {{ course.section.teacher }}<br>
+                </td>
+                {% endif %}
+                {% endfor %}
             </tr>
 
             <tr>
                 <td class="text-table">Wednesday</td>
+                {% for course in course %}
+                {% if course.section.day == 'W' %}
+                <td>{{ course.section.subject_ID.name }}<br>
+                    {{ course.section.teacher }}<br>
+                </td>
+                {% endif %}
+                {% endfor %}
             </tr>
 
             <tr>
                 <td class="text-table">Thursday</td>
+                {% for course in course %}
+                {% if course.section.day == 'H' %}
+                <td>{{ course.section.subject_ID.name }}<br>
+                    {{ course.section.teacher }}<br>
+                </td>
+                {% endif %}
+                {% endfor %}
             </tr>
 
             <tr>
                 <td class="text-table">Friday</td>
+                {% for course in course %}
+                {% if course.section.day == 'F' %}
+                <td>{{ course.section.subject_ID.name }}<br>
+                    {{ course.section.teacher }}<br>
+                </td>
+                {% endif %}
+                {% endfor %}
             </tr>
 
         </table>
