@@ -6,7 +6,12 @@ class Subject(models.Model):
     name = models.CharField(max_length=200)
     mid_term = models.CharField(max_length=200, null=True,blank=True)
     final = models.CharField(max_length=200, null=True,blank=True)
-    
+    mid_term_date = models.CharField(max_length=200, null=True,blank=True)
+    mid_term_start_time = models.CharField(max_length=200, null=True,blank=True)
+    mid_term_end_time = models.CharField(max_length=200, null=True,blank=True)
+    final_term_date = models.CharField(max_length=200, null=True,blank=True)
+    final_term_start_time = models.CharField(max_length=200, null=True,blank=True)
+    final_term_end_time = models.CharField(max_length=200, null=True,blank=True)
     def __str__(self):
         return self.name
 

@@ -46,5 +46,5 @@ class section():
 
 
 
-s = section()
-s.update()
+sec = section()
+sec.update()
