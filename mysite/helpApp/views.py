@@ -6,8 +6,8 @@ from django.db.models import Q
 
 def studyTimetable(request):
     course = User_subject.objects.all()
-    hour = list(range(8, 21))
-    return render(request, 'helpApp/studytimetable.html', {'course':course, 'hour':hour})
+    period = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+    return render(request, 'helpApp/studytimetable.html', {'course':course, 'period':period})
 
 def examTimetable(request):
     course = User_subject.objects.all()
