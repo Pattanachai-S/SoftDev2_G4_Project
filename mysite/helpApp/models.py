@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Subject(models.Model):
@@ -26,3 +27,9 @@ class Section(models.Model):
 
     def __str__(self):
         return f"{self.subject_ID.name} - Section {self.sec_num}"
+    
+    def duration(self):
+        start = datetime.strptime(self.start_time, '%H:%M')
+        end = datetime.strptime(self.end_time, '%H:%M')
+        duration = (end - start).total_seconds() / 3600  # duration in hours
+        return duration
