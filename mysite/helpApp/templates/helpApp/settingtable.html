@@ -25,7 +25,7 @@
                 <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
-                <select name="section">
+                <select name="section" id="sec">
                     {% for section in subject.section_set.all %}
                     <option value="{{ section.sec_num }}">{{ section.sec_num }} {{ section.day }} {{ section.time }}</option>
                     {% endfor %}
