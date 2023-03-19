@@ -32,7 +32,11 @@
                 </select>
                 <br>
                 <br>
-                <button id = add_btn type="submit" class="button" onclick="changeButton(this,{{ subject.subject_ID }})">Add</button>
+                <form action="{% url 'help/add_subject2' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <button id = add_btn type="submit" class="button" onclick="changeButton(this,{{ subject.subject_ID }})">Add</button>
+                </form>
             </div>
         </div>
         <br>

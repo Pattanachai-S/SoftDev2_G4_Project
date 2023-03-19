@@ -49,3 +49,13 @@ def add_subject_request(request):
         return JsonResponse({'success': True})
     else:
         return JsonResponse({'error': 'Invalid request method'})
+    
+def add_subject_request2(request):
+    if request.method == 'POST':
+        subject_id = request.POST.get('subject_id')
+        m = subject_manage()
+        m.add_subject("testuser123456", subject_id, "S.1")
+
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
