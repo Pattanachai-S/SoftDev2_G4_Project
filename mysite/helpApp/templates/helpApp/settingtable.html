@@ -32,25 +32,83 @@
                 </select>
                 <br>
                 <br>
-                <button type="submit" class="button" onclick="changeButton(this)">Add</button>
+                <button id = add_btn type="submit" class="button" onclick="changeButton(this,{{ subject.subject_ID }})">Add</button>
             </div>
         </div>
         <br>
         {% endfor %}
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function changeButton(button) {
+    function changeButton(button,subject_ID) {
         if (button.innerHTML === 'Add') {
             button.innerHTML = 'Delete';
             button.classList.toggle('button-delete');
+            console.log(subject_ID)
+
+            var csrftoken = getCookie('csrftoken');
+            var xhr = new XMLHttpRequest();
+            // Define the callback function for when the request completes
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Request was successful
+                        console.log(xhr.responseText);
+                    } else {
+                        // Request failed
+                        console.log('Error:', xhr.status);
+                    }
+                }
+            };
+            xhr.open('POST', '/help/add_subject/');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);           
+            var data = { 'subject_id': subject_ID };
+            xhr.send(JSON.stringify(data));
+            
+            
+            
         } else {
             button.innerHTML = 'Add';
             button.classList.toggle('button-delete');
         }
         button.classList.toggle('button');
     }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#add_btn').click(function() {
+        var a = $('#a-input').val();
+        var b = $('#b-input').val();
+        $.ajax({
+            url: '/add_subject/',
+            data: {subject: a, b: b},
+            dataType: 'json',
+            success: function(data) {
+                //$('#result').text('The sum is: ' + data.result);
+            }
+        });
+    });
+});
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 </script>
 
 {% endblock %}

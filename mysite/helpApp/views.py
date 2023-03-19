@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Section, Subject
 from userApp.models import User_subject
 from django.db.models import Q
+from django.http import JsonResponse
+from .user_subject_manage import subject_manage
 
 def studyTimetable(request):
     course = User_subject.objects.all()
@@ -37,3 +39,13 @@ def settingtable(request):
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
     return render(request, 'helpApp/checking.html',{'subject':subject})
+
+def add_subject_request(request):
+    if request.method == 'POST':
+        subject_id = request.POST.get('subject_id')
+        m = subject_manage()
+        m.add_subject("testuser123456", subject_id, "S.1")
+
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})

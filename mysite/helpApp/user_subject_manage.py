@@ -6,9 +6,8 @@ django.setup()
 from django.contrib.auth.models import User
 from helpApp.models import Subject,Section
 from userApp.models import User_subject
-
+from django.http import JsonResponse
 class subject_manage():
-    pass
 
     def add_subject(self, user_name, subject, section):
         """ Input: 'username', 'sunject_code', 'section_subject' """
@@ -41,6 +40,7 @@ class subject_manage():
     def check_section_can_submit():
         # Check all Section what user choose in database can submit
         pass        
+
 
 if __name__ == "__main__":
     m = subject_manage()
