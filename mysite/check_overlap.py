@@ -6,7 +6,6 @@ django.setup()
 
 from datetime import datetime, time
 import os 
-import sqlite3
 from django.db import models
 from helpApp.models import Subject,Section
 
