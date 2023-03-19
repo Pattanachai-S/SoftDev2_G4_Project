@@ -10,7 +10,7 @@
 
 <div class="content-section">
     <div class="content-container">
-        <form>
+        <form method="get">
             <input type="search" size="65" name='search-subject' placeholder="Search">
             <button type="submit">Search</button>
             <br>
@@ -25,7 +25,7 @@
                 <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
-                <select name="section" id="sec">
+                <select name="section">
                     {% for section in subject.section_set.all %}
                     <option value="{{ section.sec_num }}">{{ section.sec_num }} {{ section.day }} {{ section.time }}</option>
                     {% endfor %}

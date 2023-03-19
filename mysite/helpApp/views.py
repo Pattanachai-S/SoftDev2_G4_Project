@@ -5,12 +5,11 @@ from userApp.models import User_subject
 from django.db.models import Q
 
 def studyTimetable(request):
-    course = User_subject.objects.all()
-    period = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
-    return render(request, 'helpApp/studytimetable.html', {'course':course, 'period':period})
+    course = User_subject.objects.filter(user_id=request.user)
+    return render(request, 'helpApp/studytimetable.html', {'course':course})
 
 def examTimetable(request):
-    course = User_subject.objects.all()
+    course = User_subject.objects.filter(user_id=request.user)
     return render(request, 'helpApp/examtimetable.html', {'course':course})
 
 def checkSubject(request):
