@@ -32,7 +32,8 @@
                 </select>
                 <br>
                 <br>
-                <button type="submit" class="button" onclick="changeButton(this)">Add</button>
+                <button id="add-btn" type="submit" class="button" onclick="changeButton(this)">Add</button>
+                <button id="delete-btn" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)">Delete</button>
             </div>
         </div>
         <br>
@@ -42,14 +43,13 @@
 
 <script>
     function changeButton(button) {
-        if (button.innerHTML === 'Add') {
-            button.innerHTML = 'Delete';
-            button.classList.toggle('button-delete');
+        if (button.id === 'add-btn') {
+        button.style.display = 'none';
+        document.getElementById('delete-btn').style.display = 'block';
         } else {
-            button.innerHTML = 'Add';
-            button.classList.toggle('button-delete');
+        button.style.display = 'none';
+        document.getElementById('add-btn').style.display = 'block';
         }
-        button.classList.toggle('button');
     }
 </script>
 
