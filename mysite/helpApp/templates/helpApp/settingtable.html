@@ -32,8 +32,8 @@
                 </select>
                 <br>
                 <br>
-                <button type="submit" class="button" onclick="changeButton(this)">Add</button>
-                <button id="delete-btn" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)">Delete</button>
+                <button id="add-btn-{{ subject.pk }}" type="submit" class="button" onclick="changeButton(this)">Add</button>
+                <button id="delete-btn-{{ subject.pk }}" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)">Delete</button>
             </div>
         </div>
         <br>
@@ -43,13 +43,16 @@
 
 <script>
     function changeButton(button) {
-        if (button.id === 'add-btn') {
-        button.style.display = 'none';
-        document.getElementById('delete-btn').style.display = 'block';
-        } else {
-        button.style.display = 'none';
-        document.getElementById('add-btn').style.display = 'block';
-        }
+    var subjectId = button.id.split('-')[2];
+    var addButton = document.getElementById('add-btn-' + subjectId);
+    var deleteButton = document.getElementById('delete-btn-' + subjectId);
+    if (button.id === addButton.id) {
+        addButton.style.display = 'none';
+        deleteButton.style.display = 'block';
+    } else {
+        deleteButton.style.display = 'none';
+        addButton.style.display = 'block';
+    }
     }
 </script>
 
