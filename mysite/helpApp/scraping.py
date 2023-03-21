@@ -3,6 +3,7 @@ from django.db import models
 import os 
 from datetime import datetime
 import sqlite3
+from update_time_db import subject as update_subject
 from update_time_db import section as update_section
 class Scraping():
     
@@ -104,23 +105,23 @@ class Scraping():
             html_content = file_Sec.read()
         soup = BeautifulSoup(html_content, 'html.parser')
 
-        subject_name_list = soup.find_all('tr', attrs={'bgcolor': '#EA98FF'})
-        section_list =  soup.find_all('tr', attrs={'bgcolor': '#F1F1FD'})
+        # subject_name_list = soup.find_all('tr', attrs={'bgcolor': '#EA98FF'})
+        # section_list =  soup.find_all('tr', attrs={'bgcolor': '#F1F1FD'})
 
-        # find all subject id
-        subject_id_list = []
-        for text in subject_name_list:
-            subject = text.find("b")
-            subject_id_list.append(subject.get_text()[0:9])
+        # # find all subject id
+        # subject_id_list = []
+        # for text in subject_name_list:
+        #     subject = text.find("b")
+        #     subject_id_list.append(subject.get_text()[0:9])
 
-        sec_list = []
-        for text in section_list:
-            sec_number = text.find('td',attrs={'valign':'top'}).get_text()
-            sec_info = text.find('tbody')
-            sec_day = sec_info.find('td',attrs={'width':'7%'}).get_text()
-            sec_time = sec_info.find('td',attrs={'width':'25%'}).get_text()
-            sec_teacher = sec_info.find('td',attrs={'width':'46%'}).get_text().replace("\xa0","")
-            sec_list.append([sec_number,sec_day,sec_time,sec_teacher])
+        # sec_list = []
+        # for text in section_list:
+        #     sec_number = text.find('td',attrs={'valign':'top'}).get_text()
+        #     sec_info = text.find('tbody')
+        #     sec_day = sec_info.find('td',attrs={'width':'7%'}).get_text()
+        #     sec_time = sec_info.find('td',attrs={'width':'25%'}).get_text()
+        #     sec_teacher = sec_info.find('td',attrs={'width':'46%'}).get_text().replace("\xa0","")
+        #     sec_list.append([sec_number,sec_day,sec_time,sec_teacher])
 
 
         # find subject id and all sec
@@ -139,26 +140,28 @@ class Scraping():
                 # print(sec_number.get_text())
                 sec_number = sec_number.get_text()
                
-            sec_info = text.find('tbody')
-            # soup2 = BeautifulSoup(sec_info)
-            if sec_info != None:
-                sec_day = sec_info.find('td',attrs={'width':'7%'})
-                if sec_day != None:
-                    # print(sec_day.get_text())
-                    sec_day = sec_day.get_text()
+            # sec_info = text.find('tbody')
+            # soup2 = BeautifulSoup(text, 'html.parser')
+            sec_info = text.find_all('tbody')
+            for section in sec_info:
+                if sec_info != None:
+                    sec_day = sec_info.find('td',attrs={'width':'7%'})
+                    if sec_day != None:
+                        # print(sec_day.get_text())
+                        sec_day = sec_day.get_text()
 
-                sec_time = sec_info.find('td',attrs={'width':'25%'})
-                if sec_time != None:
-                    # print(sec_time.get_text())
-                    sec_time = sec_time.get_text()
+                    sec_time = sec_info.find('td',attrs={'width':'25%'})
+                    if sec_time != None:
+                        # print(sec_time.get_text())
+                        sec_time = sec_time.get_text()
 
-                sec_teacher = sec_info.find('td',attrs={'width':'46%'})
-                if sec_teacher != None:
-                    # print(sec_teacher.get_text())
-                    sec_teacher = sec_teacher.get_text().replace("\xa0","")
+                    sec_teacher = sec_info.find('td',attrs={'width':'46%'})
+                    if sec_teacher != None:
+                        # print(sec_teacher.get_text())
+                        sec_teacher = sec_teacher.get_text().replace("\xa0","")
 
-                sec_info = [sec_number,sec_day,sec_time,sec_teacher]
-                subject_and_sec.append([subject_id,sec_info])
+                    sec_info = [sec_number,sec_day,sec_time,sec_teacher]
+                    subject_and_sec.append([subject_id,sec_info])
         subject_and_sec.pop(0)  # remove text คณะ....
         self.subject_and_sec = subject_and_sec
 
@@ -213,21 +216,21 @@ def scraping():
     scraping = Scraping()
 
     """for clear old data"""
-    # scraping.clear_table()
+    scraping.clear_table()
     
     """for scrap subject"""
-    # scraping.scrap_subject()
-    # scraping.show_data()
-    # # scraping.save_to_database() 
-    # sub = subject()
-    # sub.update()
+    scraping.scrap_subject()
+    scraping.show_data()
+    scraping.save_to_database() 
+    sub = update_subject()
+    sub.update()
 
     """for scrarp section"""
-    # scraping.scrap_section()
-    # scraping.show_data_sec() 
-    # scraping.save_sec_to_database()
-    # sec = update_section()
-    # sec.update()
+    scraping.scrap_section()
+    scraping.show_data_sec() 
+    scraping.save_sec_to_database()
+    sec = update_section()
+    sec.update()
    
 if __name__ == "__main__":
     scraping()
