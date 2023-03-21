@@ -1,13 +1,14 @@
 from .models import Section, Subject
 from userApp.models import User_subject
 from django.contrib.auth.models import User
+from .check_overlap import Overlap
 
 
 class subject_manage():
     pass
 
     def add_subject(self, user_name, subject, section):
-        """ Input: 'username', 'sunject_code', 'section_subject' """
+        """ Input: 'username', 'subject_code', 'section_subject' """
         # App section_subject to database for user
 
         # Get user_id and sec_id
@@ -21,7 +22,7 @@ class subject_manage():
             user_subject.save()  # Add to database
 
     def remove_subject(self, user_name, subject, section):
-        """ Input: 'username', 'sunject_code', 'section_subject' """
+        """ Input: 'username', 'subject_code', 'section_subject' """
         # Remove section_subject in database for user
         # Get user_id and sec_id
         user = User.objects.get(username = user_name)
@@ -34,6 +35,17 @@ class subject_manage():
             user_subject.delete()  # remove from database
 
 
-    def check_section_can_submit():
+    def can_submit(self, user_name, subject_id, sec_num):
+        """Input: 'username', 'subject_code', 'section_subject'"""
         # Check all Section what user choose in database can submit
-        pass 
+
+        o = Overlap()
+        user = User.objects.get(username = user_name)
+        list_subject = User_subject.objects.filter(user_id = user)
+        for s in list_subject:
+            section1 = Section.objects.get(id = s.section_id)
+            if o.is_subject_overlap([section1.subject_ID.subject_ID, section1.sec_num], [subject_id, sec_num]):
+                 return False
+        
+        # If have not any overlap
+        return True  

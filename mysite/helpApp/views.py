@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .user_subject_manage import subject_manage
+from .check_overlap import Overlap
 
 def studyTimetable(request):
     if request.user.is_authenticated:
@@ -72,9 +73,10 @@ def add_subject_request(request):
 
             m = subject_manage()
             if "add_btn" in request.POST:
-                print("Add", user_name, subject_id, sec_num)
-                m.add_subject(user_name, subject_id, sec_num)
-
+                if m.can_submit(user_name, subject_id, sec_num):
+                    print("Add", user_name, subject_id, sec_num)
+                    m.add_subject(user_name, subject_id, sec_num)
+                    
             if "del_btn" in request.POST:
                 print("Delete", user_name, subject_id, sec_num)
                 m.remove_subject(user_name, subject_id, sec_num)

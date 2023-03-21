@@ -140,6 +140,7 @@ class Scraping():
                 sec_number = sec_number.get_text()
                
             sec_info = text.find('tbody')
+            # soup2 = BeautifulSoup(sec_info)
             if sec_info != None:
                 sec_day = sec_info.find('td',attrs={'width':'7%'})
                 if sec_day != None:
