@@ -35,13 +35,10 @@
                 <br>
                 <br>    
                     {% csrf_token %}
-                    <button id="add-btn-{{ subject.pk }}" type="submit" class="button" onclick="changeButton(this)">Add</button>
+                    <button id="add-btn-{{ subject.pk }}" type="submit" class="button" onclick="changeButton(this)" name="add_btn">Add</button>
                     <input type="hidden" name="subject_id" value="{{ subject.subject_ID }}">
-                    <input type="hidden" name="section_num" value="{{ section.sec_num }}">
+                    <button id="delete-btn-{{ subject.pk }}" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)" name="del_btn">Delete</button>
                 </form>
-                    
-                    <button id="delete-btn-{{ subject.pk }}" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)">Delete</button>
-                    
                 
             </div>
         </div>

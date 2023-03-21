@@ -68,9 +68,15 @@ def add_subject_request(request):
         if request.method == 'POST':
             subject_id = request.POST.get('subject_id')
             sec_num = request.POST.get('section')
+
             m = subject_manage()
-            # print(user_name, subject_id, sec_num)
-            m.add_subject(user_name, subject_id, sec_num)
+            if "add_btn" in request.POST:
+                print("Add", user_name, subject_id, sec_num)
+                m.add_subject(user_name, subject_id, sec_num)
+
+            if "del_btn" in request.POST:
+                print("Delete", user_name, subject_id, sec_num)
+                m.remove_subject(user_name, subject_id, sec_num)
 
             # return JsonResponse({'success': True}, status=400)
             subject = Subject.objects.all()
