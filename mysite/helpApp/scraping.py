@@ -33,6 +33,7 @@ class Scraping():
                 text = cell.get_text()
                 text = text.replace('\n\t\t', '')  # Remove void line 
                 text = text.replace('  ', ' ')  #  change double space to one space 
+                text = text.replace('\xa0', ' ')
                 subject.append(text)
             self.subject_list.append(subject)
         self.subject_list.pop(0)
@@ -40,12 +41,6 @@ class Scraping():
 
     def show_data(self):
         for row in self.subject_list:
-            print("---------------")
-            for cell in row:
-                print(cell)
-
-    def show_data_sec(self):
-        for row in self.section_list:
             print("---------------")
             for cell in row:
                 print(cell)
@@ -127,6 +122,7 @@ class Scraping():
         # find subject id and all sec
         subject_and_sec = []
         sub = soup.find_all('tr')
+
         for text in sub:
             t = text.find("b")
             if t != None:
@@ -142,26 +138,32 @@ class Scraping():
                
             # sec_info = text.find('tbody')
             # soup2 = BeautifulSoup(text, 'html.parser')
-            sec_info = text.find_all('tbody')
-            for section in sec_info:
-                if sec_info != None:
-                    sec_day = sec_info.find('td',attrs={'width':'7%'})
-                    if sec_day != None:
-                        # print(sec_day.get_text())
-                        sec_day = sec_day.get_text()
+            in_text = text.find_all('td',attrs={'width':'61%'})
+            for txt2 in in_text:
+                in_text2 = txt2.find_all('table',attrs={'width':'100%'})
+                for t in in_text2:
+                    sec_info_list = t.find_all('tbody')
+                    for t2 in sec_info_list:
+                        sec_info_list2 =t2.find_all('tr')
+                        for sec_info in sec_info_list2:
+                            if sec_info != None:
+                                sec_day = sec_info.find('td',attrs={'width':'7%'})
+                                if sec_day != None:
+                                    # print(sec_day.get_text())
+                                    sec_day = sec_day.get_text()
 
-                    sec_time = sec_info.find('td',attrs={'width':'25%'})
-                    if sec_time != None:
-                        # print(sec_time.get_text())
-                        sec_time = sec_time.get_text()
+                                sec_time = sec_info.find('td',attrs={'width':'25%'})
+                                if sec_time != None:
+                                    # print(sec_time.get_text())
+                                    sec_time = sec_time.get_text()
 
-                    sec_teacher = sec_info.find('td',attrs={'width':'46%'})
-                    if sec_teacher != None:
-                        # print(sec_teacher.get_text())
-                        sec_teacher = sec_teacher.get_text().replace("\xa0","")
+                                sec_teacher = sec_info.find('td',attrs={'width':'46%'})
+                                if sec_teacher != None:
+                                    # print(sec_teacher.get_text())
+                                    sec_teacher = sec_teacher.get_text().replace("\xa0","")
 
-                    sec_info = [sec_number,sec_day,sec_time,sec_teacher]
-                    subject_and_sec.append([subject_id,sec_info])
+                                sec_info = [sec_number,sec_day,sec_time,sec_teacher]
+                                subject_and_sec.append([subject_id,sec_info])
         subject_and_sec.pop(0)  # remove text คณะ....
         self.subject_and_sec = subject_and_sec
 
@@ -231,6 +233,8 @@ def scraping():
     scraping.save_sec_to_database()
     sec = update_section()
     sec.update()
+
+    
    
 if __name__ == "__main__":
     scraping()
