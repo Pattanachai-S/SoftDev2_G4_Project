@@ -1,11 +1,7 @@
-import os
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
-django.setup()
-
-from django.contrib.auth.models import User
-from helpApp.models import Subject,Section
+from .models import Section, Subject
 from userApp.models import User_subject
+from django.contrib.auth.models import User
+
 
 class subject_manage():
     pass
@@ -40,4 +36,4 @@ class subject_manage():
 
     def check_section_can_submit():
         # Check all Section what user choose in database can submit
-        pass        
+        pass 

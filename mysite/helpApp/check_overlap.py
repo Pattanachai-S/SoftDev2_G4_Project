@@ -1,12 +1,4 @@
-
-import os
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
-django.setup()
-
 from datetime import datetime, time
-import os 
-from django.db import models
 from helpApp.models import Subject,Section
 
 
@@ -110,17 +102,3 @@ class Overlap():
         # return False after check exam date-time and study day-time is do not overlap
         return False
 
-
-
-
-            
-
-
-        
-if __name__ == "__main__":
-    c = Overlap()
-    # all test is Ture or Overlap
-    # print(c.is_time_overlap("9:00-12:00","9:00-12:00"))
-    # print(c.is_time_overlap("13:00-15:00","12:00-14:00"))
-
-    print(c.is_subject_overlap(['010113138','S.1'],['010123124','S.1']))
