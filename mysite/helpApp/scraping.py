@@ -164,7 +164,7 @@ class Scraping():
 
                                 sec_info = [sec_number,sec_day,sec_time,sec_teacher]
                                 subject_and_sec.append([subject_id,sec_info])
-        subject_and_sec.pop(0)  # remove text คณะ....
+        # subject_and_sec.pop(0)  # remove text คณะ....
         self.subject_and_sec = subject_and_sec
 
     def show_data_sec(self):
