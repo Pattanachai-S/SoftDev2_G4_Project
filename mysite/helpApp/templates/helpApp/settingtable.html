@@ -32,11 +32,9 @@
                 </select>
                 <br>
                 <br>
-                <form action="{% url 'help/add_subject2' %}" method="POST">
-                    {% csrf_token %}
-                    
+
                     <button id = add_btn type="submit" class="button" onclick="changeButton(this,{{ subject.subject_ID }})">Add</button>
-                </form>
+
             </div>
         </div>
         <br>
@@ -68,7 +66,7 @@
             xhr.open('POST', '/help/add_subject/');
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.setRequestHeader('X-CSRFToken', csrftoken);           
-            var data = { 'subject_id': subject_ID };
+            //var data = { 'subject_id': "010113138" };
             xhr.send(JSON.stringify(data));
             
             
@@ -88,11 +86,11 @@ $(document).ready(function() {
         var a = $('#a-input').val();
         var b = $('#b-input').val();
         $.ajax({
-            url: '/add_subject/',
+            url: '/help/add_subject/',
             data: {subject: a, b: b},
             dataType: 'json',
             success: function(data) {
-                //$('#result').text('The sum is: ' + data.result);
+                $('#result').text('The sum is: ' + data.result);
             }
         });
     });
