@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Section, Subject
 from userApp.models import User_subject
 from django.db.models import Q
+from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 def studyTimetable(request):
     if request.user.is_authenticated:
@@ -58,3 +60,59 @@ def settingtable(request):
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
     return render(request, 'helpApp/checking.html',{'subject':subject})
+
+def add_subject_request(request):
+    if request.user.is_authenticated:
+        user_name = request.user.username  # user_id is an integer
+        user_pk = request.user.pk  # user_pk is an integer
+        if request.method == 'POST':
+            subject_id = request.POST.get('subject_id')
+            m = subject_manage()
+            print(user_name, user_pk, "S.1")
+            m.add_subject(user_name, subject_id, "S.1")
+
+            # return JsonResponse({'success': True})
+    
+            # return JsonResponse({'error': 'Invalid request method'})
+            subject = Subject.objects.all()
+            return render(request, 'helpApp/settingtable.html', {'subject':subject})
+
+        else:
+            subject = Subject.objects.all()
+            return render(request, 'helpApp/settingtable.html', {'subject':subject})
+    
+
+class subject_manage():
+    pass
+
+    def add_subject(self, user_name, subject, section):
+        """ Input: 'username', 'sunject_code', 'section_subject' """
+        # App section_subject to database for user
+
+        # Get user_id and sec_id
+        user = User.objects.get(username = user_name)
+        sub = Subject.objects.get(subject_ID = subject)
+        sec_list = Section.objects.filter(subject_ID = sub, sec_num = section)
+
+        # Loop for subject have 2 day study case
+        for sec in sec_list:   
+            user_subject = User_subject(user_id = user, section = sec)  # Create object
+            user_subject.save()  # Add to database
+
+    def remove_subject(self, user_name, subject, section):
+        """ Input: 'username', 'sunject_code', 'section_subject' """
+        # Remove section_subject in database for user
+        # Get user_id and sec_id
+        user = User.objects.get(username = user_name)
+        sub = Subject.objects.get(subject_ID = subject)
+        sec_list = Section.objects.filter(subject_ID = sub, sec_num = section)
+
+        # Loop for subject have 2 day study case
+        for sec in sec_list:   
+            user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
+            user_subject.delete()  # remove from database
+
+
+    def check_section_can_submit():
+        # Check all Section what user choose in database can submit
+        pass 
