@@ -63,17 +63,16 @@ def verify(request, subject_ID):
 
 def add_subject_request(request):
     if request.user.is_authenticated:
-        user_name = request.user.username  # user_id is an integer
+        user_name = request.user.username  
         user_pk = request.user.pk  # user_pk is an integer
         if request.method == 'POST':
             subject_id = request.POST.get('subject_id')
+            sec_num = request.POST.get('section')
             m = subject_manage()
-            print(user_name, user_pk, "S.1")
-            m.add_subject(user_name, subject_id, "S.1")
+            # print(user_name, subject_id, sec_num)
+            m.add_subject(user_name, subject_id, sec_num)
 
-            # return JsonResponse({'success': True})
-    
-            # return JsonResponse({'error': 'Invalid request method'})
+            # return JsonResponse({'success': True}, status=400)
             subject = Subject.objects.all()
             return render(request, 'helpApp/settingtable.html', {'subject':subject})
 
