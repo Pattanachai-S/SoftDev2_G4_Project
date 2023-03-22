@@ -30,20 +30,15 @@ class subject_manage():
 
         if section != None:
             sec_list = Section.objects.filter(subject_ID = sub, sec_num = section)
-            # Loop for subject have 2 day study case
-            for sec in sec_list:   
-                user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
-                user_subject.delete()  # remove from database
-
         else:
             sec_list = Section.objects.filter(subject_ID = sub)
            
-            for sec in sec_list:   
-                user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
-                user_subject.delete()  # remove from database
+        for sec in sec_list:   
+            user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
+            user_subject.delete()  # remove from database
 
-        user
-        section_list = Section.objects.filter()
+
+
 
 
 
