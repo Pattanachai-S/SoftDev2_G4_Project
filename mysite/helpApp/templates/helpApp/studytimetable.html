@@ -116,6 +116,24 @@
         <br>
 
         <a class="button" href="{% url 'table' %}" style="float: right;">Edit Timetable</a>
+
+        <br>
+        <br>
+        <br>
+
+        {% regroup course by section.subject_ID as courses_by_subject %}
+
+        {% for course_group in courses_by_subject %}
+        <div class="cardd">
+            <div class="container-about">
+            <br>
+            <a class="button-link">{{ course_group.grouper.subject_ID }} {{ course_group.grouper.name }}</a>
+            <br>
+            <br>   
+            <button type="submit" class="button-delete">Delete</button>
+            </div>
+        </div>
+        {% endfor %}
         
         {% else %}
         <tr>

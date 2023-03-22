@@ -11,7 +11,7 @@
 <div class="content-section">
     <div class="content-container">
         <form method="get">
-            <input type="search" size="65" name='search-subject' placeholder="Search">
+            <input type="search" size="65" name='search-subject' value="{{ q }}" placeholder="Search">
             <button type="submit">Search</button>
             <br>
         </form>
@@ -25,9 +25,6 @@
                 <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
-<<<<<<< Updated upstream
-                <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-                <form id="add-subject-form" action="{% url 'add_subject' %}" target="dummyframe" method="POST" >
                 <select name="section">
                     {% for section in subject.section_set.all %}
                     <option value="{{ section.sec_num }}">{{ section.sec_num }} {{ section.day }} {{ section.time }}</option>
@@ -35,49 +32,12 @@
                 </select>
                 <br>
                 <br>    
-                    {% csrf_token %}
-                    <button id="add-btn-{{ subject.pk }}" type="submit" class="button" onclick="changeButton(this)" name="add_btn">Add</button>
-                    <input type="hidden" name="subject_id" value="{{ subject.subject_ID }}">
-                    <button id="delete-btn-{{ subject.pk }}" type="submit" class="button-delete" style="display: none;" onclick="changeButton(this)" name="del_btn">Delete</button>
-                </form>
-                
-=======
-                
-                <form id="add-subject-form" action="{% url 'add_subject' %}" target="dummyframe" method="POST" >
-                    {% csrf_token %}
-                    <select name="section">
-                        {% for section in subject.section_set.all %}
-                        <option value="{{ section.sec_num }}">{{ section.sec_num }} {{ section.day }} {{ section.time }}</option>
-                        {% endfor %}
-                    </select>
-                    <br>
-                    <br>    
-                        <input type="hidden" name="subject_id" value="{{ subject.subject_ID }}">
-                        <button type="submit" class="button" name="add_btn">Add</button>
-                </form>
->>>>>>> Stashed changes
+                    <button type="submit" class="button">Add</button>
             </div>
         </div>
         <br>
         {% endfor %}
     </div>
 </div>
-
-<script>
-    function changeButton(button) {
-        var subjectId = button.id.split('-')[2];
-        var addButton = document.getElementById('add-btn-' + subjectId);
-        var deleteButton = document.getElementById('delete-btn-' + subjectId);
-        if (button.id === addButton.id) {
-            addButton.style.display = 'none';
-            deleteButton.style.display = 'block';
-        } else {
-            deleteButton.style.display = 'none';
-            addButton.style.display = 'block';
-        }
-
-
-    }
-</script>
 
 {% endblock %}

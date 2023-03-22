@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Section, Subject
 from userApp.models import User_subject
-from django.db.models import Q
+from django.db.models import Q,F
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .user_subject_manage import subject_manage
@@ -33,8 +33,9 @@ def studyTimetable(request):
 
 def examTimetable(request):
     if request.user.is_authenticated:
-        course = User_subject.objects.filter(user_id=request.user)
-        return render(request, 'helpApp/examtimetable.html', {'course':course})
+        course_mid = User_subject.objects.filter(user_id=request.user).order_by(F('section__subject_ID__mid_term_date').asc(nulls_last=True))
+        course_fin = User_subject.objects.filter(user_id=request.user).order_by(F('section__subject_ID__final_term_date').asc(nulls_last=True))
+        return render(request, 'helpApp/examtimetable.html', {'course_m': course_mid, 'course_f': course_fin})
     else:
         return render(request, 'helpApp/examtimetable.html')
 
@@ -50,14 +51,14 @@ def checkSubject(request):
     return render(request, 'helpApp/checksubject.html', context)
 
 def settingtable(request):
+    courses = User_subject.objects.filter(user_id=request.user)
     if 'search-subject' in request.GET:
-        q = request.GET.get('search-subject')
-        #subject = Subject.objects.filter(subject_ID__icontains=q)
+        q = request.GET.get('search-subject', '')
         multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
-        subject = Subject.objects.filter(multi_q)
+        subject = Subject.objects.filter(multi_q).exclude(section__in=courses.values_list('section', flat=True))
     else:
-        subject = Subject.objects.all()
-    return render(request, 'helpApp/settingtable.html', {'subject':subject})
+        subject = Subject.objects.exclude(section__in=courses.values_list('section', flat=True))
+    return render(request, 'helpApp/settingtable.html', {'subject':subject, 'course':courses, 'q':q})
 
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
