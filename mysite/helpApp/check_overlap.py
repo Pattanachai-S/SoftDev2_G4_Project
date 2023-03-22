@@ -44,7 +44,6 @@ class Overlap():
     def is_overlap(self, first_sub, second_sub):
         """Return True if overlap
             Input: ['M',"09:00-12:00"]"""
-        
         # check study day
         if ( not(self.is_same_day(first_sub[0], second_sub[0]))):
             return False  # If do not study in same day return False 
@@ -56,7 +55,7 @@ class Overlap():
             return True
         
     def is_both_have_exam(self, first_sub, second_sub):
-        if len(first_sub) >= 5 and len(second_sub) >= 5:  # have date and time
+        if len(first_sub) >= 3 and len(second_sub) >= 3:  # have date and time
             return True
         else:
             return False
@@ -74,9 +73,7 @@ class Overlap():
         mid_term_col = "mid_term"
         final_col = "final"
         # 1st subject
-        print(code1)
         sub1 = Subject.objects.filter(subject_ID=code1)
-        print(sub1)
         sub1 = sub1[0] # Get 1st query
         mid1 = sub1.mid_term.split(" ")  # พฤ. 30/3/2566 13:00-16:00
         final1 = sub1.final.split(" ")
