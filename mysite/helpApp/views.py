@@ -53,12 +53,12 @@ def checkSubject(request):
 def settingtable(request):
     courses = User_subject.objects.filter(user_id=request.user)
     if 'search-subject' in request.GET:
-        q = request.GET.get('search-subject')
+        q = request.GET.get('search-subject', '')
         multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
         subject = Subject.objects.filter(multi_q).exclude(section__in=courses.values_list('section', flat=True))
     else:
         subject = Subject.objects.exclude(section__in=courses.values_list('section', flat=True))
-    return render(request, 'helpApp/settingtable.html', {'subject':subject, 'course':courses})
+    return render(request, 'helpApp/settingtable.html', {'subject':subject, 'course':courses, 'q':q})
 
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
