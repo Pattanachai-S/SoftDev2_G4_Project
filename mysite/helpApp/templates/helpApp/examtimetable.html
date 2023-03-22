@@ -12,11 +12,12 @@
     <section class="content-section">
         <div class="content-container">
             <h2 class="content-title text-center">Mid-term</h2>
-            {% for course in course_m %}
+            {% regroup course_m by section.subject_ID as courses_by_mid %}
+            {% for course in courses_by_mid %}
             <div class="card-about">
                 <div class="container-about">
-                    <h4>{{ course.section.subject_ID.name }}</h4>
-                    <p>{{ course.section.subject_ID.mid_term }}</p>
+                    <h4>{{ course.grouper }} </h4>
+                    <p>{{ course.grouper.midterm }}</p>
                 </div>
             </div>
             <br>     
@@ -27,11 +28,12 @@
     <section class="content-section">
         <div class="content-container">
             <h2 class="content-title text-center">Final</h2>
-            {% for course in course_f %}
+            {% regroup course_f by section.subject_ID as courses_by_fin %}
+            {% for course in courses_by_fin %}
             <div class="card-about">
                 <div class="container-about">
-                    <h4>{{ course.section.subject_ID.name }}</h4>
-                    <p>{{ course.section.subject_ID.final }}</p>
+                    <h4>{{ course.grouper }} </h4>
+                    <p>{{ course.grouper.final }}</p>
                 </div>
             </div>
             <br>         
