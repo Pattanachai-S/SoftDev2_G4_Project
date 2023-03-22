@@ -111,7 +111,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/bangkok'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
