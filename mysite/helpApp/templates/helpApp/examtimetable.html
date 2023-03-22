@@ -12,7 +12,7 @@
     <section class="content-section">
         <div class="content-container">
             <h2 class="content-title text-center">Mid-term</h2>
-            {% for course in course %}
+            {% for course in course_m %}
             <div class="card-about">
                 <div class="container-about">
                     <h4>{{ course.section.subject_ID.name }}</h4>
@@ -27,7 +27,7 @@
     <section class="content-section">
         <div class="content-container">
             <h2 class="content-title text-center">Final</h2>
-            {% for course in course %}
+            {% for course in course_f %}
             <div class="card-about">
                 <div class="container-about">
                     <h4>{{ course.section.subject_ID.name }}</h4>
