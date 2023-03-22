@@ -72,6 +72,7 @@ def add_subject_request(request):
     if request.user.is_authenticated:
         user_name = request.user.username  
         user_pk = request.user.pk  # user_pk is an integer
+        subject = Subject.objects.all()
         if request.method == 'POST':
             subject_id = request.POST.get('subject_id')
             sec_num = request.POST.get('section')
@@ -81,14 +82,16 @@ def add_subject_request(request):
                 if m.can_submit(user_name, subject_id, sec_num):
                     print("Add", user_name, subject_id, sec_num)
                     m.add_subject(user_name, subject_id, sec_num)
+                    return render(request, 'helpApp/settingtable.html', {'subject':subject})
                     
             if "del_btn" in request.POST:
                 print("Delete", user_name, subject_id, sec_num)
                 m.remove_subject(user_name, subject_id, sec_num)
+                return studyTimetable(request)
 
             # return JsonResponse({'success': True}, status=400)
-            subject = Subject.objects.all()
-            return render(request, 'helpApp/settingtable.html', {'subject':subject})
+            # return render(request, 'helpApp/settingtable.html', {'subject':subject})
+            
 
         else:
             subject = Subject.objects.all()

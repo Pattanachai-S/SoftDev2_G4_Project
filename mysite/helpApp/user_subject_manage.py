@@ -27,12 +27,25 @@ class subject_manage():
         # Get user_id and sec_id
         user = User.objects.get(username = user_name)
         sub = Subject.objects.get(subject_ID = subject)
-        sec_list = Section.objects.filter(subject_ID = sub, sec_num = section)
 
-        # Loop for subject have 2 day study case
-        for sec in sec_list:   
-            user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
-            user_subject.delete()  # remove from database
+        if section != None:
+            sec_list = Section.objects.filter(subject_ID = sub, sec_num = section)
+            # Loop for subject have 2 day study case
+            for sec in sec_list:   
+                user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
+                user_subject.delete()  # remove from database
+
+        else:
+            sec_list = Section.objects.filter(subject_ID = sub)
+           
+            for sec in sec_list:   
+                user_subject = User_subject.objects.filter(user_id = user, section = sec)  # Get object
+                user_subject.delete()  # remove from database
+
+        user
+        section_list = Section.objects.filter()
+
+
 
 
     def can_submit(self, user_name, subject_id, sec_num):
