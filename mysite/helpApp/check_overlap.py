@@ -74,7 +74,9 @@ class Overlap():
         mid_term_col = "mid_term"
         final_col = "final"
         # 1st subject
+        print(code1)
         sub1 = Subject.objects.filter(subject_ID=code1)
+        print(sub1)
         sub1 = sub1[0] # Get 1st query
         mid1 = sub1.mid_term.split(" ")  # พฤ. 30/3/2566 13:00-16:00
         final1 = sub1.final.split(" ")
