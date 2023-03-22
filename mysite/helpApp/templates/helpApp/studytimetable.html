@@ -116,6 +116,22 @@
         <br>
 
         <a class="button" href="{% url 'table' %}" style="float: right;">Edit Timetable</a>
+
+        <br>
+        <br>
+        <br>
+
+        {% for course in course %}
+        <div class="cardd">
+            <div class="container-about">
+                <br>
+                <a class="button-link" >{{  course.section.subject_ID }} {{ course.section.subject_ID.name }}</a>
+                <br>
+                <br>   
+                <button type="submit" class="button-delete">Delete</button>
+            </div>
+        </div>
+        {% endfor %}
         
         {% else %}
         <tr>
