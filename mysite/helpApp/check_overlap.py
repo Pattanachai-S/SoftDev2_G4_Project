@@ -44,7 +44,6 @@ class Overlap():
     def is_overlap(self, first_sub, second_sub):
         """Return True if overlap
             Input: ['M',"09:00-12:00"]"""
-        
         # check study day
         if ( not(self.is_same_day(first_sub[0], second_sub[0]))):
             return False  # If do not study in same day return False 
@@ -56,7 +55,7 @@ class Overlap():
             return True
         
     def is_both_have_exam(self, first_sub, second_sub):
-        if len(first_sub) >= 5 and len(second_sub) >= 5:  # have date and time
+        if len(first_sub) >= 3 and len(second_sub) >= 3:  # have date and time
             return True
         else:
             return False
