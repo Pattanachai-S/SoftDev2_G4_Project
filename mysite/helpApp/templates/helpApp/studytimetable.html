@@ -111,6 +111,22 @@
                 {% endfor %}
             </tr>
 
+            <tr>
+                <td class="text-table">Saturday</td>
+                {% for time in time %}
+                    {% for course in course %}
+                        {% if course.section.day == 'S' and course.section.start_time == time %}
+                            <td style="font-size: 12px; background-color: beige;" colspan="{{ course.section.duration }}" >
+                                {{ course.section.subject_ID.name }}<br>
+                                {{ course.section.teacher }}<br>
+                            </td>
+                        {% elif time not in time_usedd.S and forloop.last %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+
         </table>
 
         <br>
@@ -158,6 +174,10 @@
 
         <tr>
             <td class="text-table">Friday</td>
+        </tr>
+
+        <tr>
+            <td class="text-table">Saturday</td>
         </tr>
         {% endif %}
 
