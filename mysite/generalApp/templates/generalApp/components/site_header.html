@@ -2,7 +2,6 @@
     <a class="site-header-item" href="{% url 'home' %}">Home</a>
     <a class="site-header-item" href="{% url 'study' %}">Study Timetable</a>
     <a class="site-header-item" href="{% url 'exam' %}">Exam Timetable</a>
-    <a class="site-header-item" href="{% url 'check' %}">Check Subject</a>
     <a class="site-header-right" href="{% url 'aboutus' %}">About Us</a>
     {% if user.is_authenticated %}
         <a class="site-header-item" href="{% url 'login' %}">{{ user.username }}</a>
