@@ -16,7 +16,7 @@ class test_Register(unittest.TestCase):
         
 
     def tearDown(self):
-        self.browser.quit()
+        pass
 
     def test_hompage(self):
         
@@ -34,6 +34,7 @@ class test_Register(unittest.TestCase):
         password_box.send_keys('password-123456')
 
         password_box.send_keys(Keys.ENTER)
+        self.browser.quit()
 
 
     def test_add_subject(self):
@@ -41,7 +42,7 @@ class test_Register(unittest.TestCase):
         self.assertIn('ตารางเรียน', self.browser.title)  # check page is correct
 
         self.browser.get(url+"/help/settingtimetable")
-        self.assertIn("ตั้งค่าตารางเรียน", self.browser.title)
+        self.assertIn('ตั้งค่าตารางเรียน', self.browser.title)
 
         # 010113138 CIRCUITS AND ELECTRONICS3(3-0)
         search_box = self.browser.find_element(By.NAME, "search-subject")
@@ -68,6 +69,10 @@ class test_Register(unittest.TestCase):
         time.sleep(1)
         add_btn = self.browser.find_element(By.NAME, "add_btn")
         add_btn.send_keys(Keys.ENTER)
+
+        self.browser.get("http://localhost:8000/help/studytimetable")
+
+
 
 
 
