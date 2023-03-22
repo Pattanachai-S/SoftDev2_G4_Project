@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .user_subject_manage import subject_manage
 from .check_overlap import Overlap
+from django.shortcuts import redirect
 
 def studyTimetable(request):
     if request.user.is_authenticated:
@@ -82,12 +83,12 @@ def add_subject_request(request):
                 if m.can_submit(user_name, subject_id, sec_num):
                     print("Add", user_name, subject_id, sec_num)
                     m.add_subject(user_name, subject_id, sec_num)
-                    return render(request, 'helpApp/settingtable.html', {'subject':subject})
+                return redirect(settingtable)
                     
             if "del_btn" in request.POST:
                 print("Delete", user_name, subject_id, sec_num)
                 m.remove_subject(user_name, subject_id, sec_num)
-                return studyTimetable(request)
+                return redirect(studyTimetable)
 
             # return JsonResponse({'success': True}, status=400)
             # return render(request, 'helpApp/settingtable.html', {'subject':subject})
@@ -95,6 +96,5 @@ def add_subject_request(request):
 
         else:
             subject = Subject.objects.all()
-            return render(request, 'helpApp/settingtable.html', {'subject':subject})
-    
+            return redirect(settingtable)
 
