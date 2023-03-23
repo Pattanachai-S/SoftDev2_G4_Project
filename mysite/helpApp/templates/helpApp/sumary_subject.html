@@ -22,12 +22,11 @@
                 <div class="container-about">
                     
                     <br>
-                    <a class="button-link" href="{% url 'verify' subject.id %}">{{ subject.subject_ID}} {{ subject.name }}</a>
+                    <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                     {% for user_sub in user_subject %}
-                        {% comment %} {{user_sub.section_id.subject_ID}} {% endcomment %}
-                        {% comment %} {% if user_sub.section_id.subject_ID  == subject %} {% endcomment %}
-                        <h6>{{ user_sub.user_id}} {{ user_sub.section.subject_ID }}</h6>
-                        {% comment %} {% endif %} {% endcomment %}
+                        {% if user_sub.section.subject_ID.id  == subject.id %}
+                        <h6>{{ user_sub.user_id}}</h6>
+                        {% endif %}
                     {% endfor %}    
                     <br>
                     <br>
