@@ -99,7 +99,7 @@ def add_subject_request(request):
             return redirect(settingtable)
         
 
-def add_subject_request(request):
+def sumary_subject(request):
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
         #subject = Subject.objects.filter(subject_ID__icontains=q)
