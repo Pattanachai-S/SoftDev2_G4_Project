@@ -18,13 +18,18 @@
         <br>
 
         {% for subject in subject %}
-            
             <div class="cardd">
                 <div class="container-about">
-                <br>
-                <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
-                {{subject_list.subject.subject_ID}}
-                <br>
+                    
+                    <br>
+                    <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
+                    {% for user_sub in user_subject %}
+                        {% if user_sub.section.subject_ID.id  == subject.id %}
+                        <h6>{{ user_sub.user_id}}</h6>
+                        {% endif %}
+                    {% endfor %}    
+                    <br>
+                    <br>
                     
                 </div>
             </div>

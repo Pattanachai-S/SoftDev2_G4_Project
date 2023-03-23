@@ -99,7 +99,7 @@ def add_subject_request(request):
             return redirect(settingtable)
         
 
-def sumary_subject(request):
+def sumary_subject_search(request):
     # Search subject
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
@@ -111,6 +111,45 @@ def sumary_subject(request):
 
     user_subject = User_subject.objects.all()
     
+    
     # sent to cilent
     context = {'subject':subject, 'user_subject':user_subject}
+    return render(request, 'helpApp/sumary_subject.html', context)
+
+def sumary_subject(request):
+    # Search subject
+    if 'search-subject' in request.GET:
+        q = request.GET.get('search-subject')
+        #subject = Subject.objects.filter(subject_ID__icontains=q)
+        multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
+        subject = Subject.objects.filter(multi_q)
+    else:
+        subject = Subject.objects.all()
+
+    subject_list = {}
+    # Decalre 0 on subject_list
+    for sub in subject:
+        subject_list[sub.subject_ID] = 0
+
+    
+    # Count student on each subject
+    user_subject = User_subject.objects.all()
+    for sub in subject:
+        for user_sub in user_subject:
+            # If user_sub is section in sub 
+            if sub.subject_ID == user_sub.section.subject_ID.subject_ID :
+                subject_list[sub.subject_ID] += 1
+
+
+    # remove subject what have no student 
+    list_for_remove = []
+    for key in subject_list:
+        if subject_list[key] == 0:
+            list_for_remove.append(key)
+    for sub_ID in list_for_remove:
+        del subject_list[sub_ID]      
+    print(subject_list)
+    
+    # sent to cilent
+    context = {'subject':subject, 'subject_list':subject_list}
     return render(request, 'helpApp/sumary_subject.html', context)
