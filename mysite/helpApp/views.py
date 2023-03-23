@@ -100,6 +100,7 @@ def add_subject_request(request):
         
 
 def sumary_subject(request):
+    # Search subject
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
         #subject = Subject.objects.filter(subject_ID__icontains=q)
@@ -107,5 +108,9 @@ def sumary_subject(request):
         subject = Subject.objects.filter(multi_q)
     else:
         subject = Subject.objects.all()
-    context = {'subject':subject}
+
+    user_subject = User_subject.objects.all()
+    
+    # sent to cilent
+    context = {'subject':subject, 'user_subject':user_subject}
     return render(request, 'helpApp/sumary_subject.html', context)

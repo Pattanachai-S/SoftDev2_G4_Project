@@ -18,15 +18,18 @@
         <br>
 
         {% for subject in subject %}
-        <div class="cardd">
-            <div class="container-about">
-                <br>
-                <a class="button-link" href="{% url 'verify' subject.id %}">{{ subject.subject_ID}} {{ subject.name }}</a>
-                <br>
-                <br>
+            {% for user_sub in user_subject %}
+            <div class="cardd">
+                <div class="container-about">
+                    <br>
+                    <a class="button-link" href="{% url 'verify' subject.id %}">{{ subject.subject_ID}} {{ subject.name }}</a>
+                    <h4>{{ user_sub.user_id}} {{ user_sub.section_id }}</hp>
+                    <br>
+                    <br>
+                </div>
             </div>
-        </div>
-        <br>
+            <br>
+            {% endfor %}
         {% endfor %}
     </div>
 </div>
