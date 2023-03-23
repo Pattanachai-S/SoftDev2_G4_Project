@@ -1,0 +1,32 @@
+{% extends 'generalApp/components/base.html' %}
+
+{% block title %} {{ subject.name }} | {% endblock %}
+
+{% block content %}
+
+<div class="header-section">
+    <h1>รายชื่อนักเรียนที่เรียนวิชา {{ subject.name }} </h1>
+</div>
+
+<div class="content-section">
+    <div class="content-container">
+        {% for user in users %}
+        <div class="cardd">
+            <div class="container-about">
+                <br>
+                    <a class="button-link" >{{ user.username }}</a>
+                <br>
+                <br>
+            </div>
+        </div>
+        <br>
+        {% empty %}
+        <p class="text-center">ยังไม่มีนักเรียนลงเรียนวิชานี้</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+{% endblock %}

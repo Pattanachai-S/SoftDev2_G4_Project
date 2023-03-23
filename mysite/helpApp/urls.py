@@ -10,4 +10,5 @@ urlpatterns = [
     path('verify/<int:subject_ID>', views.verify, name='verify'),
     path('testfinal1', views.testfinal1, name='test1'),
     path('testfinal2', views.testfinal2, name='test2'),
+    path('studentname/<int:subject_ID>', views.studentname, name='student'),
 ]

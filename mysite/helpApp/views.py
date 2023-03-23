@@ -65,6 +65,7 @@ def settingtable(request):
         'qs': q,
     }
     return render(request, 'helpApp/settingtable.html', context)
+
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
     return render(request, 'helpApp/checking.html',{'subject':subject})
@@ -99,19 +100,23 @@ def add_subject_request(request):
             return redirect(settingtable)
         
 def testfinal1(request):
-    courses = User_subject.objects.all()
-    q = request.GET.get('search-subject', '')
-    if q:
+    q = request.GET.get('search-subject','')
+    if q :
+        #subject = Subject.objects.filter(subject_ID__icontains=q)
         multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
-        subject = Subject.objects.filter(multi_q).exclude(section__in=courses.values_list('section', flat=True))
+        subject = Subject.objects.filter(multi_q)
     else:
-        subject = Subject.objects.exclude(section__in=courses.values_list('section', flat=True))
+        subject = Subject.objects.all()
     context = {
         'subject': subject,
-        'course': courses,
         'qs': q,
     }
     return render(request, 'helpApp/test1.html', context)
+
+def studentname(request, subject_ID):
+    subject = Subject.objects.get(id=subject_ID)
+    users = User.objects.filter(user_subject__section__subject_ID=subject_ID).values('username').distinct()
+    return render(request, 'helpApp/studentname.html',{'subject':subject,'users': users})
 
 def testfinal2(request):
     subjects = Subject.objects.all()
