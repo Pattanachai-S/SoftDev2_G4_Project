@@ -108,4 +108,4 @@ def sumary_subject(request):
     else:
         subject = Subject.objects.all()
     context = {'subject':subject}
-    return render(request, 'helpApp/checksubject.html', context)
+    return render(request, 'helpApp/sumary_subject.html', context)
