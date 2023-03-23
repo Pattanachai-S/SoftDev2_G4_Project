@@ -97,4 +97,23 @@ def add_subject_request(request):
         else:
             subject = Subject.objects.all()
             return redirect(settingtable)
+        
+def testfinal1(request):
+    courses = User_subject.objects.all()
+    q = request.GET.get('search-subject', '')
+    if q:
+        multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
+        subject = Subject.objects.filter(multi_q).exclude(section__in=courses.values_list('section', flat=True))
+    else:
+        subject = Subject.objects.exclude(section__in=courses.values_list('section', flat=True))
+    context = {
+        'subject': subject,
+        'course': courses,
+        'qs': q,
+    }
+    return render(request, 'helpApp/test1.html', context)
+
+def testfinal2(request):
+    subject = Subject.objects.all()
+    return render(request, 'helpApp/test2.html',{'subject':subject,})
 

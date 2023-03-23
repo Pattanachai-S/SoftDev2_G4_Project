@@ -1,0 +1,24 @@
+{% extends 'generalApp/components/base.html' %}
+
+{% block title %}test1 | {% endblock %}
+
+{% block content %}
+
+<div class="header-section">
+    <h1>Test1</h1>
+</div>
+
+<div class="content-section">
+    <div class="content-container">
+        <form method="get">
+            <input type="search" size="65" name='search-subject' value="{{ qs }}" placeholder="Search">
+            <button type="submit">Search</button>
+            <br>
+        </form>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

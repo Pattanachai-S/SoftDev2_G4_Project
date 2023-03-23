@@ -8,4 +8,6 @@ urlpatterns = [
     path('settingtimetable', views.settingtable, name='table'),
     path('add_subject', views.add_subject_request, name='add_subject'),
     path('verify/<int:subject_ID>', views.verify, name='verify'),
+    path('testfinal1', views.testfinal1, name='test1'),
+    path('testfinal2', views.testfinal2, name='test2'),
 ]

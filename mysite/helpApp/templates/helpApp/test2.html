@@ -1,0 +1,33 @@
+{% extends 'generalApp/components/base.html' %}
+
+{% block title %}test1 | {% endblock %}
+
+{% block content %}
+
+<div class="header-section">
+    <h1>Test2</h1>
+</div>
+
+<div class="content-section">
+    <div class="content-container">
+        {% for subject in subject %}
+        <div class="cardd">
+            <div class="container-about">
+                <br>
+                <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
+                <br>
+                <br>
+                <p>จำนวน  คน</p>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+    
+
+    </div>
+
+</div>
+
+{% endblock %}
