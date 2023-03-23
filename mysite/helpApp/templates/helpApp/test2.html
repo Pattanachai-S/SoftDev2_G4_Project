@@ -1,6 +1,6 @@
 {% extends 'generalApp/components/base.html' %}
 
-{% block title %}test1 | {% endblock %}
+{% block title %}test2 | {% endblock %}
 
 {% block content %}
 
@@ -14,10 +14,14 @@
         <div class="cardd">
             <div class="container-about">
                 <br>
-                <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
+                    <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
-                <p>จำนวน  คน</p>
+                {% for num_users, num in num_users.items %}
+                    {% if num_users == subject.subject_ID %}
+                    <p>จำนวน {{ num }} คน</p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
         <br>

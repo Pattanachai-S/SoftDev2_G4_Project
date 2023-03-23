@@ -114,6 +114,12 @@ def testfinal1(request):
     return render(request, 'helpApp/test1.html', context)
 
 def testfinal2(request):
-    subject = Subject.objects.all()
-    return render(request, 'helpApp/test2.html',{'subject':subject,})
+    subjects = Subject.objects.all()
 
+    num_users = {}
+    for subject in subjects:
+        sections = Section.objects.filter(subject_ID=subject)
+        user_subjects = User_subject.objects.filter(section__in=sections).values('user_id').distinct()
+        num_users[subject.subject_ID] = user_subjects.count()
+
+    return render(request, 'helpApp/test2.html', {'subject': subjects, 'num_users': num_users})
