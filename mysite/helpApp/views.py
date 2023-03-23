@@ -97,4 +97,15 @@ def add_subject_request(request):
         else:
             subject = Subject.objects.all()
             return redirect(settingtable)
+        
 
+def add_subject_request(request):
+    if 'search-subject' in request.GET:
+        q = request.GET.get('search-subject')
+        #subject = Subject.objects.filter(subject_ID__icontains=q)
+        multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
+        subject = Subject.objects.filter(multi_q)
+    else:
+        subject = Subject.objects.all()
+    context = {'subject':subject}
+    return render(request, 'helpApp/checksubject.html', context)
