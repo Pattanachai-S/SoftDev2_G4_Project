@@ -65,6 +65,7 @@ def settingtable(request):
         'qs': q,
     }
     return render(request, 'helpApp/settingtable.html', context)
+
 def verify(request, subject_ID):
     subject = Subject.objects.get(id=subject_ID)
     return render(request, 'helpApp/checking.html',{'subject':subject})
@@ -98,3 +99,24 @@ def add_subject_request(request):
             subject = Subject.objects.all()
             return redirect(settingtable)
 
+def quiz1(request):
+    if 'search-subject' in request.GET:
+        q = request.GET.get('search-subject')
+        #subject = Subject.objects.filter(subject_ID__icontains=q)
+        multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
+        subject = Subject.objects.filter(multi_q)
+    else:
+        subject = Subject.objects.all()
+    context = {'subject':subject}
+    return render(request, 'helpApp/quiz1.html', context)
+
+def quiz2(request):
+    if 'search-subject' in request.GET:
+        q = request.GET.get('search-subject')
+        #subject = Subject.objects.filter(subject_ID__icontains=q)
+        multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
+        subject = Subject.objects.filter(multi_q)
+    else:
+        subject = Subject.objects.all()
+    context = {'subject':subject}
+    return render(request, 'helpApp/quiz2.html', context)

@@ -8,5 +8,3 @@ def home(request):
 
 def about_us(request):
     return render(request, 'generalApp/aboutus.html')
-
-

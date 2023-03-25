@@ -1,27 +1,33 @@
 {% extends 'generalApp/components/base.html' %}
 
-{% block title %} {{ subject.name }} | {% endblock %}
+{% block title %}Quiz2 | {% endblock %}
 
 {% block content %}
 
 <div class="header-section">
-    <h1>รายชื่อนักศึกษาที่วางแผนจะลงวิชา {{ subject.name }}</h1>
+    <h1>All Subject</h1>
 </div>
 
 <div class="content-section">
     <div class="content-container">
+        <form method="get">
+        <input type="search" name='search-subject' placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+    
         <br>
-        
+
+        {% for subject in subject %}
         <div class="cardd">
             <div class="container-about">
                 <br>
-                <a class="button-link">{{ user.username }}</a>
+                <a class="button-link">{{ subject.subject_ID}} {{ subject.name }} {{ name.num }}</a>
                 <br>
                 <br>
             </div>
         </div>
-
         <br>
+        {% endfor %}
     </div>
 </div>
 
