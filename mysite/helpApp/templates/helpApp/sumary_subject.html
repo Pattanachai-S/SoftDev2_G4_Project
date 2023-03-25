@@ -1,35 +1,38 @@
 {% extends 'generalApp/components/base.html' %}
 
-{% block title %}ราชชื่อนักศึกษาที่จะเพิ่มวิชา | {% endblock %}
+{% block title %}รายชื่อวิชาที่มีนักศึกษาวางแผนจะลง | {% endblock %}
 
 {% block content %}
 
 <div class="header-section">
-    <h1>ราชชื่อนักศึกษาที่จะเพิ่มวิชา</h1>
+    <h1>รายชื่อวิชาที่มีนักศึกษาวางแผนจะลง</h1>
 </div>
 
 <div class="content-section">
     <div class="content-container">
         <form method="get">
-        <input type="search" name='search-subject' placeholder="Search">
-        <button type="submit">Search</button>
-        </form>
+            <input type="search" name='search-subject' placeholder="Search">
+            <button type="submit">Search</button>
+            </form>
     
         <br>
-
         {% for subject in subject %}
-            
+        {% if subject.subject_ID in subject_list %}
             <div class="cardd">
                 <div class="container-about">
-                <br>
+
                 <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
-                {{subject_list.subject.subject_ID}}
-                <br>
-                    
+                
+                {% for subject_ID, value in subject_list.items  %}
+                        {% if subject.subject_ID  == subject_ID %}
+                            <h6>{{ value}} คน</h6> 
+                        {% endif %}
+                    {% endfor %}  
+
                 </div>
             </div>
-            <br>
-           
+
+        {% endif %}
         {% endfor %}
     </div>
 </div>
