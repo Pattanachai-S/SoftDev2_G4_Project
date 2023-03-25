@@ -25,7 +25,7 @@
                     {% for sub_ID, users in subject_list.items%}
                         {% if sub_ID  == subject.subject_ID %}
                             {% for user in users %}
-                                <h6>{{ user }}</h6>
+                            <br>{{ user }}
                             {% endfor %}   
                         {% endif %}
                     {% endfor %}    
