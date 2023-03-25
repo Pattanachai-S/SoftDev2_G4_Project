@@ -131,7 +131,7 @@ def summary_subject_search(request):
             list_for_remove.append(key)
     for sub_ID in list_for_remove:
         del subject_list[sub_ID]      
-    print(subject_list)
+
     
     
     # sent to cilent
@@ -174,7 +174,6 @@ def summary_subject(request):
             subject_list[key] = len(subject_list[key])
     for sub_ID in list_for_remove:
         del subject_list[sub_ID]      
-    print(subject_list)
     
     # sent to cilent
     context = {'subject':subject, 'subject_list':subject_list}
