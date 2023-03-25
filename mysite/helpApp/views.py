@@ -114,7 +114,7 @@ def sumary_subject_search(request):
     
     # sent to cilent
     context = {'subject':subject, 'user_subject':user_subject}
-    return render(request, 'helpApp/sumary_subject.html', context)
+    return render(request, 'helpApp/sumary_subject_search.html', context)
 
 def sumary_subject(request):
     # Search subject
