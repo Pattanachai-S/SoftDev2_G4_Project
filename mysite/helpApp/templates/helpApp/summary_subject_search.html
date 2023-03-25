@@ -16,16 +16,17 @@
         </form>
     
         <br>
-
         {% for subject in subject %}
             <div class="cardd">
                 <div class="container-about">
                     
                     
                     <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
-                    {% for user_sub in user_subject %}
-                        {% if user_sub.section.subject_ID.id  == subject.id %}
-                        <h6>{{ user_sub.user_id}}</h6>
+                    {% for sub_ID, users in subject_list.items%}
+                        {% if sub_ID  == subject.subject_ID %}
+                            {% for user in users %}
+                                <h6>{{ user }}</h6>
+                            {% endfor %}   
                         {% endif %}
                     {% endfor %}    
                     <br>
