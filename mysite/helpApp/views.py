@@ -99,7 +99,7 @@ def add_subject_request(request):
             return redirect(settingtable)
         
 
-def sumary_subject_search(request):
+def summary_subject_search(request):
     # Search subject
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
@@ -114,9 +114,9 @@ def sumary_subject_search(request):
     
     # sent to cilent
     context = {'subject':subject, 'user_subject':user_subject}
-    return render(request, 'helpApp/sumary_subject_search.html', context)
+    return render(request, 'helpApp/summary_subject_search.html', context)
 
-def sumary_subject(request):
+def summary_subject(request):
     # Search subject
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
@@ -152,4 +152,4 @@ def sumary_subject(request):
     
     # sent to cilent
     context = {'subject':subject, 'subject_list':subject_list}
-    return render(request, 'helpApp/sumary_subject.html', context)
+    return render(request, 'helpApp/summary_subject.html', context)
