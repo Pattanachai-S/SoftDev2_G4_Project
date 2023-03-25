@@ -151,23 +151,27 @@ def summary_subject(request):
     subject_list = {}
     # Decalre 0 on subject_list
     for sub in subject:
-        subject_list[sub.subject_ID] = 0
+        subject_list[sub.subject_ID] = []
 
     
-    # Count student on each subject
+    # add student on each subject
     user_subject = User_subject.objects.all()
     for sub in subject:
         for user_sub in user_subject:
-            # If user_sub is section in sub 
-            if sub.subject_ID == user_sub.section.subject_ID.subject_ID :
-                subject_list[sub.subject_ID] += 1
+            # If user add section in that subject and that user have not add that subject (for subject 2 study day case)
+            if sub.subject_ID == user_sub.section.subject_ID.subject_ID and user_sub.user_id.username not in subject_list[sub.subject_ID]:
+                subject_list[sub.subject_ID].append(user_sub.user_id.username)
 
 
     # remove subject what have no student 
     list_for_remove = []
     for key in subject_list:
-        if subject_list[key] == 0:
+        if len(subject_list[key]) == 0:
+            # add to list for remove if have no student
             list_for_remove.append(key)
+        else:
+            # count user each subject
+            subject_list[key] = len(subject_list[key])
     for sub_ID in list_for_remove:
         del subject_list[sub_ID]      
     print(subject_list)
