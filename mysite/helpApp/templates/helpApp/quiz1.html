@@ -8,27 +8,31 @@
     <h1>All Subject</h1>
 </div>
 
-<div class="content-section">
-    <div class="content-container">
-        <form method="get">
-        <input type="search" name='search-subject' placeholder="Search">
-        <button type="submit">Search</button>
-        </form>
-    
-        <br>
+{% if user.is_authenticated %}
+    <div class="content-section">
+        <div class="content-container">
+            <form method="get">
+            <input type="search" name='search-subject' placeholder="Search">
+            <button type="submit">Search</button>
+            </form>
+        
+            <br>
 
-        {% for subject in subject %}
-        <div class="cardd">
-            <div class="container-about">
-                <br>
-                <a class="button-link" href="{% url 'verify' subject.id %}">{{ subject.subject_ID}} {{ subject.name }}</a>
-                <br>
-                <br>
+            {% for subject in subject %}
+            <div class="cardd">
+                <div class="container-about">
+                    <br>
+                    <a class="button-link" href="{% url 'verify' subject.id %}">{{ subject.subject_ID}} {{ subject.name }}</a>
+                    <br>
+                    <br>
+                </div>
             </div>
+            <br>
+            {% endfor %}
         </div>
-        <br>
-        {% endfor %}
     </div>
-</div>
+{% else %}
+
+{% endif %}
 
 {% endblock %}

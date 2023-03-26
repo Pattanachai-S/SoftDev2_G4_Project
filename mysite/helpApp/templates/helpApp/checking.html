@@ -14,10 +14,12 @@
         
         <div class="cardd">
             <div class="container-about">
+                {% for user in enrollments %}
                 <br>
                 <a class="button-link">{{ user.username }}</a>
                 <br>
                 <br>
+                {% endfor %}
             </div>
         </div>
 

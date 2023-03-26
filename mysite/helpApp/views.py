@@ -66,10 +66,6 @@ def settingtable(request):
     }
     return render(request, 'helpApp/settingtable.html', context)
 
-def verify(request, subject_ID):
-    subject = Subject.objects.get(id=subject_ID)
-    return render(request, 'helpApp/checking.html',{'subject':subject})
-
 def add_subject_request(request):
     if request.user.is_authenticated:
         user_name = request.user.username  
@@ -99,24 +95,49 @@ def add_subject_request(request):
             subject = Subject.objects.all()
             return redirect(settingtable)
 
+def verify(request, subject_ID):
+    subject = Subject.objects.get(id=subject_ID)
+    enrollments = User.objects.filter(user_subject__section__subject_ID=subject_ID)
+    username = enrollments.values_list('username', flat=True).distinct()
+
+    context = {'subject':subject, 'enrollments': enrollments}
+    return render(request, 'helpApp/checking.html', context)
+
 def quiz1(request):
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
-        #subject = Subject.objects.filter(subject_ID__icontains=q)
         multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
-        subject = Subject.objects.filter(multi_q)
+        subjects = Subject.objects.filter(multi_q)
     else:
-        subject = Subject.objects.all()
-    context = {'subject':subject}
+        subjects = Subject.objects.all()
+
+    subjects = Subject.objects.all()
+    user_subject = User_subject.objects.select_related('user_id', 'section__subject_ID').filter(section__subject_ID__in=subjects)
+    
+    subject_list = {}
+    for user_sub in user_subject:
+        subject_ID = user_sub.section.subject_ID
+        username = user_sub.user_id.username
+        
+        if username not in subject_list.get(subject_ID, []):
+            subject_list.setdefault(subject_ID, []).append(username)
+
+    context = {'subject': subjects}
     return render(request, 'helpApp/quiz1.html', context)
 
 def quiz2(request):
     if 'search-subject' in request.GET:
         q = request.GET.get('search-subject')
-        #subject = Subject.objects.filter(subject_ID__icontains=q)
         multi_q = Q(Q(subject_ID__icontains=q) | Q(name__icontains=q))
-        subject = Subject.objects.filter(multi_q)
+        subjects = Subject.objects.filter(multi_q)
     else:
-        subject = Subject.objects.all()
-    context = {'subject':subject}
-    return render(request, 'helpApp/quiz2.html', context)
+        subjects = Subject.objects.all()
+
+    # Count number of unique users enrolled in each subject
+    num_users = {}
+    for subject in subjects:
+        sections = Section.objects.filter(subject_ID=subject)
+        num_users[subject.subject_ID] = User_subject.objects.filter(section__in=sections).values('user_id').distinct().count()
+
+    # Render the template with the subjects and user counts
+    return render(request, 'helpApp/quiz2.html', {'subject': subjects, 'num_users': num_users})

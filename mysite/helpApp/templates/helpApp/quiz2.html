@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="header-section">
-    <h1>All Subject</h1>
+    <h1>รายวิชาทั้งหมดพร้อมจำนวนนักศึกษาที่จะลง</h1>
 </div>
 
 <div class="content-section">
@@ -14,21 +14,30 @@
         <input type="search" name='search-subject' placeholder="Search">
         <button type="submit">Search</button>
         </form>
-    
-        <br>
 
         {% for subject in subject %}
         <div class="cardd">
             <div class="container-about">
+
                 <br>
-                <a class="button-link">{{ subject.subject_ID}} {{ subject.name }} {{ name.num }}</a>
+                    <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
+                {% for num_users, num in num_users.items %}
+
+                    {% if num_users == subject.subject_ID %}
+                    <p>จำนวนนักศึกษา {{ num }} คน</p>
+                    {% endif %}
+                    
+                {% endfor %} 
+
             </div>
         </div>
         <br>
         {% endfor %}
+
     </div>
+
 </div>
 
 {% endblock %}
