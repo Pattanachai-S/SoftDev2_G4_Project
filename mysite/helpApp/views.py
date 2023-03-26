@@ -118,7 +118,7 @@ def quiz1(request):
     for user_sub in user_subject:
         subject_ID = user_sub.section.subject_ID
         username = user_sub.user_id.username
-        
+
         if username not in subject_list.get(subject_ID, []):
             subject_list.setdefault(subject_ID, []).append(username)
 

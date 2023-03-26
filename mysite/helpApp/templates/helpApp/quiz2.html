@@ -23,10 +23,10 @@
                     <a class="button-link" >{{ subject.subject_ID}} {{ subject.name }}</a>
                 <br>
                 <br>
-                {% for num_users, num in num_users.items %}
+                {% for val_users, value in num_users.items %}
 
-                    {% if num_users == subject.subject_ID %}
-                    <p>จำนวนนักศึกษา {{ num }} คน</p>
+                    {% if val_users == subject.subject_ID %}
+                    <p>จำนวนนักศึกษา {{ value }} คน</p>
                     {% endif %}
                     
                 {% endfor %} 
